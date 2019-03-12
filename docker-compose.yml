@@ -1,0 +1,22 @@
+version: "3"
+services:
+  app:
+    build: .
+    image: jenkinstec
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 300M
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "50000:50000"
+      - "8080:8080"
+    networks:
+      - webnet
+    volumes:
+      - /var/jenkins_home
+networks:
+  webnet:
